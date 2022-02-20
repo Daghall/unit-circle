@@ -1,6 +1,7 @@
 import controls from "./controls.js";
 import {colors} from "./constants.js";
 import UnitCirlce from "./unit-circle.js";
+import drawCircle from "./draw-circle.js";
 import drawGrid from "./draw-grid.js";
 
 let unitCirlce;
@@ -27,6 +28,7 @@ function draw() {
   reset();
 
   drawGrid(canvas, properties);
+  drawCircle(canvas, properties);
 }
 
 function reset() {
