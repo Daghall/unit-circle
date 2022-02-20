@@ -1,10 +1,11 @@
-import controls from "./controls.js";
+import Controls from "./controls.js";
 import {colors} from "./constants.js";
 import UnitCircle from "./unit-circle.js";
 import drawAngle from "./draw-angle.js";
 import drawCircle from "./draw-circle.js";
 import drawGrid from "./draw-grid.js";
 
+let controls;
 let unitCircle;
 let canvas;
 let properties;
@@ -36,8 +37,8 @@ function init() {
   };
 
   unitCircle = new UnitCircle(draw, properties);
-  controls(unitCircle, canvasElement, properties);
-  draw(unitCircle);
+  controls = new Controls(draw, unitCircle, canvasElement, properties);
+  draw();
 }
 
 function draw() {
@@ -45,7 +46,7 @@ function draw() {
 
   drawGrid(canvas, properties);
   drawCircle(canvas, properties);
-  drawAngle(canvas, properties, unitCircle);
+  drawAngle(canvas, properties, unitCircle, controls);
 }
 
 function reset() {

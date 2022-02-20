@@ -1,30 +1,54 @@
-export default function Controls(unitCirlce, canvasElement, {origin}) {
-  let mouseDown = false;
+export default class Controls {
+  constructor(drawCallback, unitCircle, canvasElement, {origin}) {
+    console.log({unitCircle, canvasElement, origin}); // eslint-disable-line no-console
+    this.drawCallback = drawCallback;
+    this.unitCircle = unitCircle;
+    this.canvasElement = canvasElement;
+    this.origin = origin;
+    this.mouseDown = false;
+    this.showAlternateAngle = false;
 
-  document.addEventListener("mousedown", (evt) => {
-    mouseDown = true;
-    if (mouseDown && evt.target === canvasElement) {
-      unitCirlce.update(getCoordinates(evt));
-    }
-  });
+    this.setupEventListeners();
+  }
 
-  document.addEventListener("mouseup", () => {
-    mouseDown = false;
-  });
+  toggleAlternateAngle() {
+    this.showAlternateAngle = !this.showAlternateAngle;
+    this.drawCallback();
+  }
 
-  document.addEventListener("mousemove", (evt) => {
-    if (mouseDown && evt.target === canvasElement) {
-      unitCirlce.update(getCoordinates(evt));
-    }
-  });
+  setupEventListeners() {
+    window.addEventListener("keydown", (event) => {
+      switch (event.key) {
+        case "a":
+          this.toggleAlternateAngle();
+          break;
+      }
+    });
 
-  function getCoordinates(evt) {
-    const x = -1 * (origin.x - evt.offsetX);
-    const y = origin.y - evt.offsetY;
-    return {
+    document.addEventListener("mousedown", (event) => {
+      this.mouseDown = true;
+      if (this.mouseDown && event.target === this.canvasElement) {
+        this.updateUnitCircle(event);
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      this.mouseDown = false;
+    });
+
+    document.addEventListener("mousemove", (event) => {
+      if (this.mouseDown && event.target === this.canvasElement) {
+        this.updateUnitCircle(event);
+      }
+    });
+  }
+
+  updateUnitCircle(event) {
+    const x = -1 * (this.origin.x - event.offsetX);
+    const y = this.origin.y - event.offsetY;
+    this.unitCircle.update({
       x,
       y,
-    };
+    });
   }
 }
-
