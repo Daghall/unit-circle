@@ -1,10 +1,8 @@
 import {colors, fonts} from "./constants.js";
 
-export default function drawCircle(canvas, {canvasWidth, canvasHeight, gridSize}) {
-  const radius = gridSize * 10;
-  const xOffset = gridSize * 5;
-  const x = canvasWidth / 2 - xOffset;
-  const y = canvasHeight / 2;
+export default function drawCircle(canvas, {canvasWidth, canvasHeight, origin, radius}) {
+  const x = origin.x;
+  const y = origin.y;
   const axisArrowSize = 6;
   const axisLabelOffset = 10;
 

@@ -1,27 +1,43 @@
 import controls from "./controls.js";
 import {colors} from "./constants.js";
-import UnitCirlce from "./unit-circle.js";
+import UnitCircle from "./unit-circle.js";
+import drawAngle from "./draw-angle.js";
 import drawCircle from "./draw-circle.js";
 import drawGrid from "./draw-grid.js";
 
-let unitCirlce;
+let unitCircle;
 let canvas;
-const properties = {};
+let properties;
 
 function init() {
   const canvasElement = document.querySelector("canvas");
+  const canvasWidth = canvasElement.getAttribute("width");
+  const canvasHeight = canvasElement.getAttribute("height");
+  const center = canvasWidth / 2;
+  const gridSize = 15;
+  const xOffset = gridSize * 5;
+  const origin = {
+    x: canvasWidth / 2 - xOffset,
+    y: canvasHeight / 2,
+  };
+  const radius = gridSize * 10;
+
   canvas = canvasElement.getContext("2d");
-  properties.canvasWidth = canvasElement.getAttribute("width");
-  properties.canvasHeight = canvasElement.getAttribute("height");
-  properties.center = properties.canvasWidth / 2;
-
-  properties.gridSize = 15;
-
   canvas.textAlign = "center";
 
-  unitCirlce = new UnitCirlce(draw);
-  controls(unitCirlce, canvas, properties);
-  draw();
+  properties = {
+    canvasWidth,
+    canvasHeight,
+    center,
+    gridSize,
+    xOffset,
+    origin,
+    radius,
+  };
+
+  unitCircle = new UnitCircle(draw, properties);
+  controls(unitCircle, canvasElement, properties);
+  draw(unitCircle);
 }
 
 function draw() {
@@ -29,6 +45,7 @@ function draw() {
 
   drawGrid(canvas, properties);
   drawCircle(canvas, properties);
+  drawAngle(canvas, properties, unitCircle);
 }
 
 function reset() {
