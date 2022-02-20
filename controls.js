@@ -1,6 +1,5 @@
 export default class Controls {
   constructor(drawCallback, unitCircle, canvasElement, {origin}) {
-    console.log({unitCircle, canvasElement, origin}); // eslint-disable-line no-console
     this.drawCallback = drawCallback;
     this.unitCircle = unitCircle;
     this.canvasElement = canvasElement;

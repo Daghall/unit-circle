@@ -3,6 +3,7 @@ import {colors} from "./constants.js";
 import UnitCircle from "./unit-circle.js";
 import drawAngle from "./draw-angle.js";
 import drawCircle from "./draw-circle.js";
+import drawInfoBox from "./draw-info-box.js";
 import drawGrid from "./draw-grid.js";
 
 let controls;
@@ -47,6 +48,7 @@ function draw() {
   drawGrid(canvas, properties);
   drawCircle(canvas, properties);
   drawAngle(canvas, properties, unitCircle, controls);
+  drawInfoBox(canvas, properties, unitCircle, controls);
 }
 
 function reset() {

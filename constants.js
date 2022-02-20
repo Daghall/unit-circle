@@ -6,9 +6,18 @@ export const colors = {
   angleAlt: "burlywood",
   cos: "brown",
   sin: "darkcyan",
+  infoBox: {
+    fill: "whitesmoke",
+    stroke: "burlywood",
+  },
 };
 
 export const fonts = {
-  default: "48px arial",
+  default: "10px arial",
   numberLine: "12px arial",
+  infoBox: {
+    key: "bold 14px arial",
+    value: "14px monospace",
+    options: "12px arial",
+  },
 };
