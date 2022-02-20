@@ -6,6 +6,7 @@ export default class Controls {
     this.origin = origin;
     this.mouseDown = false;
     this.showAlternateAngle = false;
+    this.snapping = false;
 
     this.setupEventListeners();
   }
@@ -20,6 +21,9 @@ export default class Controls {
       switch (event.key) {
         case "a":
           this.toggleAlternateAngle();
+          break;
+        case "s":
+          this.unitCircle.toggleSnapping();
           break;
       }
     });

@@ -25,7 +25,11 @@ class InfoBox {
   }
 
   getAltAngleValue() {
-    return this.controls.showAlternateAngle ? "✔" : "✘";
+    return this.formatBoolean(this.controls.showAlternateAngle);
+  }
+
+  getSnappingValue() {
+    return this.formatBoolean(this.unitCircle.snapping);
   }
 
   formatTrig(value) {
@@ -40,6 +44,10 @@ class InfoBox {
       return "";
     }
     return `${angle.toFixed(1)}°`;
+  }
+
+  formatBoolean(value) {
+    return value ? "✔" : "✘";
   }
 }
 
@@ -67,8 +75,9 @@ export default function drawInfoBox(canvas, {gridSize, origin, radius}, unitCirc
     {key: "Sin", value: infoBox.getSinValue(), color: colors.sin},
     {key: "Cos", value: infoBox.getCosValue(), color: colors.cos},
     {},
-    {key: "– Options –", value: "", color: colors.default, font: fonts.default},
-    {key: "Show alt. angle", value: infoBox.getAltAngleValue(), color: colors.angleAlt, font: fonts.infoBox.options},
+    {key: "– Options –", value: "", font: fonts.default},
+    {key: "Show alt. angle", value: infoBox.getAltAngleValue(), font: fonts.infoBox.options},
+    {key: "Snapping", value: infoBox.getSnappingValue(), font: fonts.infoBox.options},
   ];
 
   const startX = x + gridSize;
@@ -79,7 +88,7 @@ export default function drawInfoBox(canvas, {gridSize, origin, radius}, unitCirc
     if (!key || !show) return;
     canvas.font = font || fonts.infoBox.key;
     canvas.textAlign = "left";
-    canvas.fillStyle = color;
+    canvas.fillStyle = color || colors.default;
     canvas.fillText(key, startX, startY + index * rowOffset);
 
     canvas.font = fonts.infoBox.value;
