@@ -5,6 +5,7 @@ export default function drawCircle(canvas, {canvasWidth, canvasHeight, origin, r
   const y = origin.y;
   const axisArrowSize = 6;
   const axisLabelOffset = 10;
+  const axisNumberOffset = 7;
 
   canvas.strokeStyle = colors.default;
   canvas.lineWidth = 1;
@@ -14,6 +15,13 @@ export default function drawCircle(canvas, {canvasWidth, canvasHeight, origin, r
 
   // Circle
   canvas.arc(x, y, radius, 0, 2 * Math.PI);
+  canvas.stroke();
+  canvas.textAlign = "right";
+  canvas.strokeText("1", x - axisNumberOffset, y - radius - axisNumberOffset);
+  canvas.strokeText("-1", x - axisNumberOffset, y + radius + 2 * axisNumberOffset);
+  canvas.strokeText("-1", x - radius - axisNumberOffset, y + 2 * axisNumberOffset);
+  canvas.textAlign = "left";
+  canvas.strokeText("1", x + radius + axisNumberOffset, y + 2 * axisNumberOffset);
 
   // X-axis
   canvas.moveTo(0, y);
@@ -21,6 +29,7 @@ export default function drawCircle(canvas, {canvasWidth, canvasHeight, origin, r
   canvas.lineTo(canvasWidth - axisArrowSize, y + axisArrowSize);
   canvas.moveTo(canvasWidth, y);
   canvas.lineTo(canvasWidth - axisArrowSize, y - axisArrowSize);
+  canvas.textAlign = "center";
   canvas.strokeText("x", canvasWidth - axisLabelOffset, y - axisLabelOffset);
 
   // Y-axis
