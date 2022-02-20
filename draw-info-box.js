@@ -22,7 +22,7 @@ class InfoBox {
     let angle;
 
     if (this.unitCircle.showRadians) {
-      angle = (2 * Math.PI - this.unitCircle.angle) / Math.PI;
+      angle = (2 * Math.PI - this.unitCircle.angle) / -Math.PI;
     } else {
       angle = this.unitCircle.getAngleDegrees().angleAlt;
     }
