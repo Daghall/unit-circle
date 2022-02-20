@@ -4,6 +4,7 @@ export default class UnitCircle {
   constructor(drawCallBack) {
     this.draw = drawCallBack;
     this.snapping = false;
+    this.showRadians = false;
     this.snapPoints = [];
     this.createSnapPoints();
   }
@@ -61,6 +62,11 @@ export default class UnitCircle {
 
   toggleSnapping() {
     this.snapping = !this.snapping;
+    this.draw();
+  }
+
+  toggleRadians() {
+    this.showRadians = !this.showRadians;
     this.draw();
   }
 }

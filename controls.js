@@ -25,6 +25,9 @@ export default class Controls {
         case "s":
           this.unitCircle.toggleSnapping();
           break;
+        case "d":
+          this.unitCircle.toggleRadians();
+          break;
       }
     });
 

@@ -7,13 +7,27 @@ class InfoBox {
   }
 
   getAngle() {
-    const {angle} = this.unitCircle.getAngleDegrees();
-    return this.formatAngle(angle);
+    let angle;
+
+    if (this.unitCircle.showRadians) {
+      angle = this.unitCircle.angle / Math.PI;
+    } else {
+      angle = this.unitCircle.getAngleDegrees().angle;
+    }
+
+    return this.formatAngle(angle, this.unitCircle.showRadians);
   }
 
   getAngleAlt() {
-    const {angleAlt} = this.unitCircle.getAngleDegrees();
-    return this.formatAngle(angleAlt);
+    let angle;
+
+    if (this.unitCircle.showRadians) {
+      angle = (2 * Math.PI - this.unitCircle.angle) / Math.PI;
+    } else {
+      angle = this.unitCircle.getAngleDegrees().angleAlt;
+    }
+
+    return this.formatAngle(angle, this.unitCircle.showRadians);
   }
 
   getSinValue() {
@@ -32,6 +46,10 @@ class InfoBox {
     return this.formatBoolean(this.unitCircle.snapping);
   }
 
+  getRadiansValue() {
+    return this.formatBoolean(this.unitCircle.showRadians);
+  }
+
   formatTrig(value) {
     if (isNaN(value)) {
       return "";
@@ -39,11 +57,13 @@ class InfoBox {
     return value.toFixed(3);
   }
 
-  formatAngle(angle) {
+  formatAngle(angle, showRadians) {
     if (!isFinite(angle)) {
       return "";
     }
-    return `${angle.toFixed(1)}°`;
+    const suffix = showRadians ? "π" : "°";
+    const decimals = showRadians ? 2 : 1;
+    return `${angle.toFixed(decimals)}${suffix}`;
   }
 
   formatBoolean(value) {
@@ -78,6 +98,7 @@ export default function drawInfoBox(canvas, {gridSize, origin, radius}, unitCirc
     {key: "– Options –", value: "", font: fonts.default},
     {key: "Show alt. angle", value: infoBox.getAltAngleValue(), font: fonts.infoBox.options},
     {key: "Snapping", value: infoBox.getSnappingValue(), font: fonts.infoBox.options},
+    {key: "Radians", value: infoBox.getRadiansValue(), font: fonts.infoBox.options},
   ];
 
   const startX = x + gridSize;
