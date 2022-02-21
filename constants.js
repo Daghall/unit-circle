@@ -1,7 +1,10 @@
 export const colors = {
   backgound: "wheat",
   default: "black",
-  grid: "#dbc8a0", // black with 10 % opacity, over wheat
+  grid: {
+    default: "#dbc8a0", // black with 10 % opacity, over wheat
+    half: "#b0a281", // black with 30 % opacity, over wheat
+  },
   angle: "goldenrod",
   angleAlt: "burlywood",
   cos: "brown",
