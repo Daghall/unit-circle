@@ -19,7 +19,7 @@ export default function drawGrid(canvas, {gridSize, origin, radius}, unitCircle,
     canvas.lineWidth = 1;
     canvas.strokeStyle = colors.angleAlt;
     canvas.beginPath();
-    canvas.arc(x, y, angleRadius, 0, -angle);
+    canvas.arc(x, y, angleRadius, 0, -angle || 2 * Math.PI);
     canvas.stroke();
   }
 
