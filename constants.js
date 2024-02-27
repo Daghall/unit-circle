@@ -13,6 +13,7 @@ export const colors = {
     fill: "whitesmoke",
     stroke: "burlywood",
   },
+  snapAngles: "#453f32", // black with 70 % opacity, over wheat
 };
 
 export const fonts = {

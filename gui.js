@@ -39,7 +39,7 @@ function init() {
 
   unitCircle = new UnitCircle(draw, properties);
   controls = new Controls(draw, unitCircle, canvasElement, properties);
-  draw();
+  draw(controls);
 }
 
 function draw() {

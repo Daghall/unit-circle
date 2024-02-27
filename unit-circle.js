@@ -5,20 +5,22 @@ export default class UnitCircle {
     this.draw = drawCallBack;
     this.snapping = false;
     this.showRadians = false;
+    this.showSnapPoints = false;
     this.snapPoints = [];
     this.createSnapPoints();
   }
 
   createSnapPoints() {
     // Add every multiple of 30°
-    const max = (2 + 1 / 6) * PI;
-    for (let i = 0; i < max; i += PI / 6) {
-      this.snapPoints.push(i);
+    let max = 360 / 30 + 1;
+    for (let i = 0; i < max; ++i) {
+      this.snapPoints.push(i * PI / 6);
     }
 
-    // Add every multiple of 45°
-    for (let i = PI / 4; i < max; i += PI / 2) {
-      this.snapPoints.push(i);
+    // Add multiples of 45° (skipping multiples of 90°)
+    max = 360 / 45;
+    for (let i = 1; i < max; i += 2) {
+      this.snapPoints.push(i * PI / 4);
     }
     this.snapPoints.sort();
   }
@@ -62,6 +64,11 @@ export default class UnitCircle {
 
   toggleSnapping() {
     this.snapping = !this.snapping;
+    this.draw();
+  }
+
+  toggleSnapPoints() {
+    this.showSnapPoints = !this.showSnapPoints;
     this.draw();
   }
 

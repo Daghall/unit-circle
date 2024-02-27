@@ -22,6 +22,9 @@ export default class Controls {
         case "a":
           this.toggleAlternateAngle();
           break;
+        case "S":
+          this.unitCircle.toggleSnapPoints();
+          break;
         case "s":
           this.unitCircle.toggleSnapping();
           break;
